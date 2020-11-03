@@ -2,8 +2,13 @@ package store.idragon.product.interfacemanager.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import store.idragon.product.interfacemanager.dao.IdrUserRepository;
+import store.idragon.product.interfacemanager.domain.IdrUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author xiaoshimei0305
@@ -15,9 +20,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("module/")
 public class ModuleController {
+    @Autowired
+    private IdrUserRepository idrUserRepository;
+
     @ApiOperation(value = "desc of method", notes = "")
-    @GetMapping(value="hello")
-    public Object hello( /* 参数注解 */ @ApiParam(value = "desc of param" , required=true ) @RequestParam String name) {
-        return "Hello " + name + "!";
+    @GetMapping(value="users")
+    public List<IdrUser> users() {
+        List<IdrUser> list = new ArrayList<IdrUser>();
+        list = idrUserRepository.findAll();
+        return list;
     }
 }
