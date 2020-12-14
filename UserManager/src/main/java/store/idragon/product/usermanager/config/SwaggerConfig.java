@@ -1,4 +1,4 @@
-package store.idragon.product.interfacemanager.config;
+package store.idragon.product.usermanager.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

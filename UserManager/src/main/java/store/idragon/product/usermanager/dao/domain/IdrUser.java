@@ -1,4 +1,4 @@
-package store.idragon.product.interfacemanager.domain;
+package store.idragon.product.usermanager.dao.domain;
 
 import lombok.Data;
 

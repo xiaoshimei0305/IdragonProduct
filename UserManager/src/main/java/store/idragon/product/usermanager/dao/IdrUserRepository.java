@@ -1,7 +1,7 @@
-package store.idragon.product.interfacemanager.dao;
+package store.idragon.product.usermanager.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import store.idragon.product.interfacemanager.domain.IdrUser;
+import store.idragon.product.usermanager.dao.domain.IdrUser;
 
 /**
  * @author xiaoshimei0305

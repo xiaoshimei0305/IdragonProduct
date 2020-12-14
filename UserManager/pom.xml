@@ -8,16 +8,20 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>store.idragon.product</groupId>
-	<artifactId>interfacemanager</artifactId>
+	<artifactId>user-manager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>InterfaceManager</name>
-	<description>InterfaceManager project for Spring Boot</description>
+	<name>UserManager</name>
+	<description>UserManager project for Spring Boot</description>
 
 	<properties>
 		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>store.idragon.tool</groupId>
+			<artifactId>base</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -70,12 +74,19 @@
 	</dependencies>
 
 	<build>
+		<finalName>IdragonUserManager</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
