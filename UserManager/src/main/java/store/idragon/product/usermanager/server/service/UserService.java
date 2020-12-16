@@ -10,9 +10,9 @@ import store.idragon.product.usermanager.dto.query.LoginRequest;
 import store.idragon.product.usermanager.dto.query.UserQuery;
 import store.idragon.product.usermanager.server.converter.UserConverter;
 import store.idragon.tool.base.dto.PageDataQuery;
-import store.idragon.tool.base.dto.PageResultParam;
 import store.idragon.product.usermanager.dao.domain.IdrUser;
-import java.util.ArrayList;
+import store.idragon.tool.base.dto.result.PageResultParam;
+
 import java.util.List;
 
 /**
