@@ -32,7 +32,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <!-- 引用第三方版本 -->
-        <idragon-tool.version>0.0.1-RELEASE</idragon-tool.version>
+        <idragon-tool.version>0.0.2-RELEASE</idragon-tool.version>
         <springboot.version>2.3.4.RELEASE</springboot.version>
         <swagger.version>2.9.2</swagger.version>
         <lombok.version>1.18.12</lombok.version>

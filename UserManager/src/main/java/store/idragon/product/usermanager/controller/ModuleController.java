@@ -9,8 +9,8 @@ import store.idragon.product.usermanager.dto.query.LoginRequest;
 import store.idragon.product.usermanager.dto.query.UserQuery;
 import store.idragon.product.usermanager.server.service.UserService;
 import store.idragon.tool.base.dto.PageDataQuery;
-import store.idragon.tool.base.dto.PageResultParam;
-import store.idragon.tool.base.dto.ResultInfo;
+import store.idragon.tool.base.dto.result.PageResultParam;
+import store.idragon.tool.base.dto.result.ResultInfo;
 
 /**
  * @author xiaoshimei0305
