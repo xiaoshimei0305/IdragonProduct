@@ -15,15 +15,13 @@ import java.util.List;
  * description
  * @version 1.0
  */
-//@Mapper(componentModel = "spring")
 @Component
 public class UserConverter {
     /**
      * 转换请求结果实体
-     * @param idrUser
-     * @return
+     * @param idrUser 用户对象
+     * @return 前端展示用户信息
      */
-   // @Mappings({ })
     public UserInfo toInfo(IdrUser idrUser){
         if(idrUser!=null){
             UserInfo result=new UserInfo();
@@ -36,10 +34,9 @@ public class UserConverter {
 
     /**
      *  转换用户列表
-     * @param idrUsers
-     * @return
+     * @param idrUsers 用户信息列表
+     * @return 展示用户列表
      */
-   // @Mappings({ })
     public  List<UserInfo> toUserList(List<IdrUser> idrUsers){
         List<UserInfo> resultList=new ArrayList<>();
         if(idrUsers!=null&&idrUsers.size()>0){

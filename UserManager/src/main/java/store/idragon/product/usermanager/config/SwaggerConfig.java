@@ -19,6 +19,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    /**
+     * 创建swagger 初始化类
+     * @return Docket 对象
+     */
     @Bean
     public Docket createRestApi(){
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
@@ -27,6 +31,10 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any()).build();
     }
 
+    /**
+     * 定义api基本信息
+     * @return 返回ApiInfo对象
+     */
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
                 .title("Interface manager API Doc")

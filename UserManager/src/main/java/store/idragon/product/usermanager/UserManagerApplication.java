@@ -8,7 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class UserManagerApplication {
-
+	/**
+	 * 应用启动类
+ 	 * @param args 启动参数
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(UserManagerApplication.class, args);
 	}

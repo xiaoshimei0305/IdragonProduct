@@ -19,12 +19,31 @@ import java.io.Serializable;
 @Table(name = "idr_user")
 @Data
 public class IdrUser implements Serializable {
+    /**
+     * 用户主键
+     */
     @Id
     @GeneratedValue
     @Column(name = "user_id")
     private String userId;
+    /**
+     * 用户名称
+     */
     @Column(name = "user_name")
     private String userName;
+    /**
+     * 用户密码
+     */
     @Column(name = "password")
     private String passWord;
+    /**
+     * 用户手机号码
+     */
+    @Column(name = "phone")
+    private String phone;
+    /**
+     * 用户微信帐号
+     */
+    @Column(name = "wx_mini")
+    private String wxMini;
 }
