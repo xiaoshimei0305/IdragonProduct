@@ -54,6 +54,11 @@
             </dependency>
             <dependency>
                 <groupId>store.idragon.tool</groupId>
+                <artifactId>rest</artifactId>
+                <version>${idragon-tool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>store.idragon.tool</groupId>
                 <artifactId>http</artifactId>
                 <version>${idragon-tool.version}</version>
             </dependency>

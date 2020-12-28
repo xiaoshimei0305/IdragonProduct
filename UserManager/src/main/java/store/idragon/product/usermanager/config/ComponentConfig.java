@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import store.idragon.product.usermanager.util.SessionKeyHolder;
+import store.idragon.product.usermanager.dto.info.UserInfo;
+import store.idragon.product.usermanager.util.StringHolder;
+import store.idragon.product.usermanager.util.UserInfoHolder;
 import store.idragon.tool.http.wechat.WeChatMiniAppClient;
+import store.idragon.tool.rest.TokenManager;
 
 /**
  * @author xiaoshimei0305
@@ -20,23 +23,37 @@ public class ComponentConfig {
     private WeChatConfig weChatConfig;
 
     /**
-     * 获取用户sessionKey 存储对象
-     * @return 对象操作类
-     */
-    @Bean
-    public SessionKeyHolder getSessionKeyHolder(){
-        return new SessionKeyHolder();
-    }
-
-    /**
      * 加载单例微信客户端请求对象
      * @return 微信访问客户端
      */
     @Bean
-    public WeChatMiniAppClient loadBalanced() {
-        return new WeChatMiniAppClient(weChatConfig.getWxMiniAppId(),weChatConfig.getWxMiniAppSecret(),getSessionKeyHolder());
+    public WeChatMiniAppClient loadWeChatMiniAppClient() {
+        return new WeChatMiniAppClient(weChatConfig.getWxMiniAppId(),weChatConfig.getWxMiniAppSecret(),loadStringHolder());
     }
 
-
+    /**
+     * 获取用户管理
+     * @return  用户管理
+     */
+    @Bean
+    public TokenManager<UserInfo> loadTokenManager() {
+        return new TokenManager<>(loadUserHolder());
+    }
+    /**
+     * 获取用户管理
+     * @return  用户管理
+     */
+    @Bean
+    public UserInfoHolder loadUserHolder() {
+        return new UserInfoHolder();
+    }
+    /**
+     * 获取用户管理
+     * @return  用户管理
+     */
+    @Bean
+    public StringHolder loadStringHolder() {
+        return new StringHolder();
+    }
 
 }

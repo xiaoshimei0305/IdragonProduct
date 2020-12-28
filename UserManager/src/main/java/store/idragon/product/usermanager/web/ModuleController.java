@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import store.idragon.product.usermanager.dto.commond.WxMiniUserInfo;
 import store.idragon.product.usermanager.dto.info.UserInfo;
 import store.idragon.product.usermanager.dto.query.LoginRequest;
 import store.idragon.product.usermanager.dto.query.UserQuery;
@@ -12,7 +13,9 @@ import store.idragon.tool.base.check.ParamCheckUtils;
 import store.idragon.tool.base.dto.PageDataQuery;
 import store.idragon.tool.base.dto.result.PageResultParam;
 import store.idragon.tool.base.dto.result.ResultInfo;
+import store.idragon.tool.http.wechat.WeChatMiniAppClient;
 import store.idragon.tool.http.wechat.dto.WxUserInfo;
+import store.idragon.tool.rest.TokenManager;
 
 /**
  * @author xiaoshimei0305
@@ -24,6 +27,9 @@ import store.idragon.tool.http.wechat.dto.WxUserInfo;
 @RestController
 @RequestMapping("user/")
 public class ModuleController {
+    @Autowired
+    private WeChatMiniAppClient weChatMiniAppClient;
+
     @Autowired
     private UserService userService;
 
@@ -56,9 +62,22 @@ public class ModuleController {
      */
     @ApiOperation(value = "微信用户登录", notes = "")
     @PostMapping(value="wxMiniLogin")
-    public ResultInfo<String> wxMiniLogin(String code) {
+    public ResultInfo<UserInfo> wxMiniLogin(@RequestBody String code) {
         ParamCheckUtils.notNull(code,"票据");
         return ResultInfo.ok(userService.wxMiniLogin(code));
+    }
+
+    /**
+     * 微信用户信息绑定接口
+     * @param wxMiniUserInfo 微信绑定传入参数
+     * @return 微信用户信息
+     */
+    @ApiOperation(value = "绑定微信用户信息", notes = "")
+    @PostMapping(value="wxMiniBindUserInfo")
+    public ResultInfo<String> wxMiniBindUserInfo(@RequestBody WxMiniUserInfo wxMiniUserInfo) {
+        WxUserInfo info = weChatMiniAppClient.getUserInfo(wxMiniUserInfo.getEncryptedData(), wxMiniUserInfo.getIv());
+        userService.wxMiniBindUserInfo(info,wxMiniUserInfo.getUserId());
+        return ResultInfo.ok(wxMiniUserInfo.getUserId());
     }
 
 }

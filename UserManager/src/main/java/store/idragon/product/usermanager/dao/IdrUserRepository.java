@@ -32,4 +32,15 @@ public interface IdrUserRepository extends JpaRepository<IdrUser, String> {
     @Transactional
     @Query(value="insert into idr_user(user_id,wx_mini) values (:userId,:value)",nativeQuery = true)
     void createrUserByExctenalAccount(@Param("userId") String userId,@Param("value") String value);
+
+    /**
+     * 绑定用户信息
+     * @param userId 用户Id
+     * @param userName 用户名称
+     * @param unionId 联合ID
+     */
+    @Modifying
+    @Transactional
+    @Query(value="update idr_user set user_name=:userName, union_id=:unionId where user_id = :userId",nativeQuery = true)
+    void updateUserInfo(@Param("userId") String userId,@Param("userName") String userName,@Param("unionId") String unionId);
 }

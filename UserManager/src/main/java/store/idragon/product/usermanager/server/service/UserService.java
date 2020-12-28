@@ -16,6 +16,8 @@ import store.idragon.product.usermanager.dao.domain.IdrUser;
 import store.idragon.tool.base.dto.result.PageResultParam;
 import store.idragon.tool.base.exception.IDragonException;
 import store.idragon.tool.http.wechat.WeChatMiniAppClient;
+import store.idragon.tool.http.wechat.dto.WxUserInfo;
+import store.idragon.tool.rest.TokenManager;
 
 import java.util.List;
 
@@ -27,13 +29,15 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class UserService {
+public class UserService<wxMiniBindUserInfo> {
     @Autowired
     private IdrUserRepository idrUserRepository;
     @Autowired
     private UserConverter userConverter;
     @Autowired
     private WeChatMiniAppClient weChatMiniAppClient;
+    @Autowired
+    private TokenManager<UserInfo> tokenManager;
 
     /**
      * 用户信息分页查询
@@ -59,7 +63,7 @@ public class UserService {
      * @param code 微信返回用户票据
      * @return 用户编号
      */
-    public String wxMiniLogin(String  code) {
+    public UserInfo wxMiniLogin(String  code) {
         String openId=weChatMiniAppClient.getLoginInfo(code).getOpenId();
         String userId=queryUserByOpenId(openId,ExternalAccountEnum.WX_MINI);
         if(StringUtils.isBlank(userId)){
@@ -69,7 +73,7 @@ public class UserService {
                 throw new IDragonException();
             }
         }
-        return userId;
+        return loginHandlerByUserId(userId);
     }
 
 
@@ -96,5 +100,37 @@ public class UserService {
     public void createUserByOpenId(String openId, ExternalAccountEnum type){
          idrUserRepository.createrUserByExctenalAccount(openId,openId);
     }
+
+    /**
+     * 修改用户基本信息
+     * @param userInfo 用户信息
+     * @param userId 用户Id
+     */
+   public void  wxMiniBindUserInfo(WxUserInfo userInfo,String userId){
+        idrUserRepository.updateUserInfo(userId,userInfo.getNickName(),userInfo.getUnionId());
+   }
+
+    /**
+     * 通过用户唯一ID进行登录操作
+     * @param userId 用户唯一ID
+     * @return 用户登录对象
+     */
+   public UserInfo loginHandlerByUserId(String userId){
+       UserInfo userInfo=getUserInfoById(userId);
+       tokenManager.storeToken(userId,userInfo);
+       return userInfo;
+   }
+
+    /**
+     * 获取用户信息
+     * @param userId 用户唯一ID
+     * @return 用户信息
+     */
+    public UserInfo getUserInfoById(String userId){
+        UserInfo userInfo=new UserInfo();
+        userInfo.setUserId(userId);
+        return userInfo;
+    }
+
 
 }

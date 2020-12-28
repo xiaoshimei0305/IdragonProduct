@@ -20,7 +20,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>store.idragon.tool</groupId>
-			<artifactId>base</artifactId>
+			<artifactId>rest</artifactId>
 			<exclusions>
 				<exclusion>
 					<groupId>com.google.guava</groupId>
